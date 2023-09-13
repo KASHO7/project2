@@ -1,9 +1,14 @@
 'use strict';
 function MakeMultiFilter(originalArray){
-    let arrayFilterer = originalArray.slice();
+    let currentArray = originalArray.slice();
     function arrayFilterer(filterCriteria, callback){
 
         if(typeof filterCriteria === 'function'){
-            arrayFilterer = arrayFilterer.filter(filterCriteria);
+            currentArray = currentArray.filter(filterCriteria);
         }
+        if(typeof callback === 'function'){
+        callback(currentArray);
+        }
+        return arrayFilterer;
+    }
 }
