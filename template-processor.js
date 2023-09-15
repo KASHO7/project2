@@ -1,3 +1,4 @@
+'use strict';
 function TemplateProcessor(template) {
     this.template = template;
 }
