@@ -4,15 +4,19 @@ class TemplateProcessor {
     constructor(template) {
         this.template = template;
     }
-    fillIn(dictionary){
+
+    fillIn(dictionary) {
         let returnString = this.template;
-        for (const property in dictionary){
+        for (const property in dictionary) {
             if (Object.prototype.hasOwnProperty.call(dictionary, property)) {
-                returnString = returnString.replaceAll("{{" + property + "}}",dictionary[property]);
+                const placeholder = `{{${property}}}`;
+                returnString = returnString.replaceAll(placeholder, dictionary[property]);
             }
         }
-        const regex = /{{.*}}/g;
-        returnString = returnString.replaceAll(regex,"");
+
+        // Modify the regex to match placeholders without any property (e.g., {{}})
+        const regex = /{{[^{}]*}}/g;
+        returnString = returnString.replace(regex, '');
         return returnString;
     }
 }
